@@ -6,7 +6,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 var corsOptions = {
-    origin: ["http://localhost:8081"],
+    origin: ["http://localhost:4200"],
     credentials: true,
   };
 
