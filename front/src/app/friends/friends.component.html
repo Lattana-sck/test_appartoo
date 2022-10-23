@@ -1,1 +1,15 @@
-<p>friends works!</p>
+<div class="">
+    <h3>Ajouter un ami</h3>
+    <form>
+        <select>
+            <option *ngFor="let username of userNameList" value="{{username}}">{{username}}</option>
+        </select>
+    </form>
+    
+    <h2>Mes amis</h2>
+    <ul>
+        <li *ngFor="let friend of friends">
+            <p>{{friend}}</p>
+        </li>
+    </ul>
+</div>

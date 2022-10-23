@@ -98,5 +98,7 @@ exports.getUser = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find();
-  res.status(200).send(users);
+  res.status(200).send({
+    users: users,
+  });
 }

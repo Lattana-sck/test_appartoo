@@ -1,16 +1,76 @@
 <div class="container mx-auto sm:px-4" *ngIf="currentUser; else loggedOut">
-    <header class="py-8 px-4 md:py-16 md:px-8 mb-8 bg-gray-200 rounded">
-      <h3>
-        <strong>{{ currentUser.username }}</strong> Profile
-      </h3>
+    <header class="border-4 border-blue-400 m-5 mx-auto p-5 text-center w-6/12 bg-blue-200 rounded overflow-hidden shadow-lg">
+      <h2><strong>{{ currentUser.username }}'s</strong> Profile</h2>
+      <p>Here you can modify your profile !</p>
     </header>
-    <p><strong>Username: </strong>{{ currentUser.username }}</p>
-    <p><strong>Email: </strong>{{ currentUser.email }}</p>
-    <p><strong>Roles: </strong>{{ currentUser.role }}</p>
+    <div class="m-0 mx-auto">
+      <img class="rounded-full w-32 h-32 m-0 mx-auto border-4 border-blue-400" src="{{src}}" alt="User avatar">
+      <div class="border-4 border-blue-400 bg-blue-200 w-6/12 text-center p-0 px-auto pt-10 m-0 mx-auto mt-5">
+        <form
+        class="w-9/12 m-0 mx-auto"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+        >
+            <label>Username</label>
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                #username="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                placeholder="{{currentUser.username}}"
+                />
+            <label>Email</label>
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                placeholder="{{currentUser.email}}"
+            />
+            <label>Role</label>
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="role"
+                [(ngModel)]="form.roles"
+                required
+                #role="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                placeholder="{{currentUser.role}}"
+            />
+              
+            <label>Password</label>
+            <input 
+                  type="password"
+                  class="block border border-grey-light w-full p-3 rounded mb-4"
+                  name="password"
+                  [(ngModel)]="form.password"
+                  required
+                  minlength="6"
+                  #password="ngModel"
+                  [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                  placeholder="Password"
+            />
+            
+            <button
+                  type="submit"
+                  class="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-500 focus:outline-none my-1"
+            >Modify</button>
+        </form>
+        <button type="submit" class="mb-10 w-9/12 m-0 mx-auto text-center py-3 rounded bg-red-600 text-white hover:bg-red-500 focus:outline-none my-1" (click)="deleteUser()">Delete my account</button>
+            
+    </div>
   </div>
-  
-  <!-- Crée un formulaire pour modifier son compte -->
-  
-  <ng-template #loggedOut>
-    Please login.
-  </ng-template>
+</div>
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

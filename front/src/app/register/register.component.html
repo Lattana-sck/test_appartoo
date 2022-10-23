@@ -1,99 +1,87 @@
-<div class="md:w-full pr-4 pl-4">
-    <div class="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300 card-container">
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="mb-4">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            minlength="3"
-            maxlength="20"
-            #username="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-          />
-          <div class="hidden mt-1 text-sm text-red" *ngIf="username.errors && f.submitted">
-            <div *ngIf="username.errors['required']">Username is required</div>
-            <div *ngIf="username.errors['minlength']">
-              Username must be at least 3 characters
+  <div class="bg-grey-500 min-h-screen flex flex-col">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div class="bg-blue-200 border-2 border-blue-400 px-6 py-8 rounded shadow-md text-black w-full">
+            <h1 class="mb-8 text-3xl text-center">Register</h1>
+              <form
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+              >
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                minlength="3"
+                maxlength="20"
+                #username="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                placeholder="Username" />
+            <div class="hidden mt-1 text-sm text-red" *ngIf="username.errors && f.submitted">
+              <div *ngIf="username.errors['required']">Username is required</div>
+              <div *ngIf="username.errors['minlength']">
+                Username must be at least 3 characters
+              </div>
+              <div *ngIf="username.errors['maxlength']">
+                Username must be at most 20 characters
+              </div>
             </div>
-            <div *ngIf="username.errors['maxlength']">
-              Username must be at most 20 characters
+
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+                email
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                placeholder="Email" />
+            <div class="hidden mt-1 text-sm text-red" *ngIf="email.errors && f.submitted">
+              <div *ngIf="email.errors['required']">Email is required</div>
+              <div *ngIf="email.errors['email']">
+                Email must be a valid email address
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="mb-4">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-          />
-          <div class="hidden mt-1 text-sm text-red" *ngIf="email.errors && f.submitted">
-            <div *ngIf="email.errors['required']">Email is required</div>
-            <div *ngIf="email.errors['email']">
-              Email must be a valid email address
-            </div>
-          </div>
-        </div>
-        <div class="mb-4">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-          />
-          <div class="hidden mt-1 text-sm text-red" *ngIf="password.errors && f.submitted">
-            <div *ngIf="password.errors['required']">Password is required</div>
-            <div *ngIf="password.errors['minlength']">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="mb-4">
-            <label for="role">role</label>
+
+            <input 
+                type="password"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                placeholder="Password" />
+
             <input
-              type="text"
-              class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-              name="role"
-              [(ngModel)]="form.role"
-              #role="ngModel"
-              required
-              [ngClass]="{ 'is-invalid': f.submitted && role.errors }"
-            />
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                name="role"
+                [(ngModel)]="form.role"
+                #role="ngModel"
+                required
+                [ngClass]="{ 'is-invalid': f.submitted && role.errors }"
+                placeholder="Role"
+              />
             <div class="hidden mt-1 text-sm text-red" *ngIf="role.errors && f.submitted">
               <div *ngIf="role.errors['required']">role is required</div>
             </div>
-          </div>
-        <div class="mb-4">
-          <button class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600 block w-full">Register</button>
+            
+
+            <button
+                type="submit"
+                class="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-500 focus:outline-none my-1"
+            >Create Account</button>
+
+            <div class="relative px-3 py-3 mb-4 border rounded bg-orange-200 border-orange-300 text-orange-800" *ngIf="f.submitted && isSignUpFailed">
+              Signup failed!<br />{{ errorMessage }}
+            </div>
+          </form>
         </div>
-  
-        <div class="relative px-3 py-3 mb-4 border rounded bg-orange-200 border-orange-300 text-orange-800" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
-        </div>
-      </form>
-  
-      <div class="relative px-3 py-3 mb-4 border rounded bg-green-200 border-green-300 text-green-800" *ngIf="isSuccessful">
-        Your registration is successful!
-      </div>
     </div>
-  </div>
+</div>

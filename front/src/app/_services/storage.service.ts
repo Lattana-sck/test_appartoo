@@ -6,6 +6,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class StorageService {
+
   constructor() {}
 
   clean(): void {
@@ -17,10 +18,17 @@ export class StorageService {
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  public getToken(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    const token = JSON.parse(`${user}`).token;
+
+    return token;
+  }
+  
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
     const token = JSON.parse(`${user}`).token;
-    
+
     if (token) {
       return jwt_decode(token);
     }
