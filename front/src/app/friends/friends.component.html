@@ -1,15 +1,40 @@
-<div class="">
-    <h3>Ajouter un ami</h3>
-    <form>
-        <select>
-            <option *ngFor="let username of userNameList" value="{{username}}">{{username}}</option>
-        </select>
-    </form>
-    
-    <h2>Mes amis</h2>
-    <ul>
-        <li *ngFor="let friend of friends">
-            <p>{{friend}}</p>
-        </li>
-    </ul>
+<div class="w-full h-screen container justify-center items-center">
+    <header class="border-4 border-blue-400 m-5 mx-auto p-5 text-center w-6/12 bg-blue-200 rounded overflow-hidden shadow-lg">
+        <h2>Hey <strong>{{ currentUsername }} !</strong></h2>
+        <p>Here you can see all members, add them or remove them !</p>
+      </header>
+    <div class="w-full border-4 border-blue-400 text-center justify-around item-center p-10 m-10 flex flew-row bg-blue-200">
+        <div class="">
+            <table class="table-auto">
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                <tr *ngFor="let user of usersList">
+                    <td>{{user.username}}</td>
+                    <td>{{user.role}}</td>
+                    <td>
+                        <button (click)="addFriend(user._id)">➕</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class="table-auto">
+                <tr>
+                    <th>Friends</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                <tr *ngFor="let friend of usernameFriend">
+                    <td>{{ friend.username }}</td>
+                    <td>{{ friend.role }}</td>
+                    <td>
+                        <button (click)="removeFriend(friend._id)">➖</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

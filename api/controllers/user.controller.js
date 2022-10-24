@@ -102,3 +102,9 @@ exports.getAllUsers = async (req, res) => {
     users: users,
   });
 }
+
+exports.getUsernameById = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.find({ _id: id});
+  res.status(200).send(user);
+}

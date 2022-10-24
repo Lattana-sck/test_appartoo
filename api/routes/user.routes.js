@@ -12,7 +12,8 @@ module.exports = function(app) {
   
   app.get("/api/user/getUser/:id", [authJwt.verifyToken], controller.getUser)
   app.get("/api/user/getAllUsers", [authJwt.verifyToken], controller.getAllUsers)
-  
+  app.get("/api/user/getUsernameById/:id", [authJwt.verifyToken], controller.getUsernameById)
+
   app.put("/api/user/:id", [authJwt.verifyToken], controller.update);
   app.delete("/api/user/:id", [authJwt.verifyToken], controller.delete);
 
