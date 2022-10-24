@@ -68,6 +68,7 @@
                 [ngClass]="{ 'is-invalid': f.submitted && role.errors }"
                 placeholder="Role"
               />
+              
             <div class="hidden mt-1 text-sm text-red" *ngIf="role.errors && f.submitted">
               <div *ngIf="role.errors['required']">role is required</div>
             </div>

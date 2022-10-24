@@ -15,9 +15,6 @@ export class ProfileComponent implements OnInit {
     password: null,
     role: null
   };
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
   currentUser: any;
   src!: string;
  
@@ -25,33 +22,32 @@ export class ProfileComponent implements OnInit {
   
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser().others;
-    switch (this.currentUser.role) {
-      case 'Guerrier':
+    switch (this.currentUser.role.toLowerCase()) {
+      case 'guerrier':
         this.src = 'assets/images/guerrier.png';
         break;
-      case 'Alchimiste':
+      case 'alchimiste':
         this.src = 'assets/images/alchimiste.png';
         break;
-      case 'Sorcier':
+      case 'sorcier':
         this.src = 'assets/images/sorcier.png';
         break;
-      case 'Espion':
+      case 'espion':
         this.src = 'assets/images/espion.png';
         break;
-       case 'Enchanteur':
+       case 'enchanteur':
         this.src = 'assets/images/enchanteur.png';
     }
   }
 
   onSubmit(): void {
     const { username, email, password, role } = this.form;
-    console.log(this.currentUser._id) 
     this.userService.updateUser(this.currentUser._id,username, email, password, role).subscribe(
      res => {
       console.log(res);
      } 
     );
-    this.router.navigate(['home'], {queryParams: { registered: 'true' } });
+    this.router.navigate(['profile'], {queryParams: { registered: 'true' } });
   }
   deleteUser(): void { console.log("Account deleted ! ") }
 }

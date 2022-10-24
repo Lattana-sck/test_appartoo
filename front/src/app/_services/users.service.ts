@@ -4,9 +4,6 @@ import { Users } from '../models/users.models';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +28,9 @@ export class UsersService {
   getUsernameById(id: string): any {
     return this.http.get<any>(`http://localhost:5000/api/user/getUsernameById/${id}`);
   }
+  
   updateUser(id: string, username: string, email: string, password: string, role: string): Observable<any> {
+    this.token = this.storageService.getToken();
     return this.http.put<any>(`http://localhost:5000/api/user/${id}`,
     {
       username,
@@ -39,7 +38,13 @@ export class UsersService {
       password,
       role
     },
-    httpOptions);
+    {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${this.token}`
+      }),
+    }
+    );
   }
 
   addFriends(id: string): Observable<any> {

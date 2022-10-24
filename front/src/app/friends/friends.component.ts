@@ -13,9 +13,6 @@ import { UsersService } from '../_services/users.service';
 })
 
 export class FriendsComponent implements OnInit {
-  
-  readonly USER_API = 'http://localhost:5000/api/user';
-
   currentUsername!: string;
   users!: any;
   usersList: Users[] = [];
@@ -49,7 +46,6 @@ export class FriendsComponent implements OnInit {
         
         return this.usernameFriend;
       })
-      console.log(this.usernameFriend)
   }
 
   addFriend(id: any){
