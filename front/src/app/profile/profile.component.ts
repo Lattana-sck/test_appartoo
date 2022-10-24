@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 import { StorageService } from '../_services/storage.service';
 import { UsersService } from '../_services/users.service';
 
@@ -18,7 +19,7 @@ export class ProfileComponent implements OnInit {
   currentUser: any;
   src!: string;
  
-  constructor(private storageService: StorageService, private userService: UsersService, private router: Router) { }
+  constructor(private authService:AuthService,private storageService: StorageService, private userService: UsersService, private router: Router) { }
   
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser().others;
@@ -49,5 +50,13 @@ export class ProfileComponent implements OnInit {
     );
     this.router.navigate(['profile'], {queryParams: { registered: 'true' } });
   }
-  deleteUser(): void { console.log("Account deleted ! ") }
+  deleteUser(): void { 
+    this.userService.deleteUser(this.currentUser._id).subscribe(
+      res => {
+        console.log(res);
+      }
+    );
+    this.authService.logout();
+    this.router.navigate(['home'], {queryParams: { registered: 'true' } });
+  }
 }

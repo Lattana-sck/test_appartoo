@@ -47,6 +47,16 @@ export class UsersService {
     );
   }
 
+  deleteUser(id: string): Observable<any> {
+    this.token = this.storageService.getToken();
+    return this.http.delete<any>(`http://localhost:5000/api/user/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${this.token}`
+      }),
+    });
+  }
+
   addFriends(id: string): Observable<any> {
     this.token = this.storageService.getToken();
     return this.http.post<any>(`http://localhost:5000/api/user/addFriend/${id}`, {
