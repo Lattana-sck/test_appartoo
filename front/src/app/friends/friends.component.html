@@ -31,7 +31,7 @@
                     <td>{{ friend.username }}</td>
                     <td>{{ friend.role }}</td>
                     <td>
-                        <button (click)="removeFriend(friend._id)">➖</button>
+                        <button (click)="removeFriend(friend._id)">➖{{friend._id}}</button>
                     </td>
                 </tr>
             </table>

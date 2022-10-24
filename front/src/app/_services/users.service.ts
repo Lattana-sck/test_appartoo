@@ -4,6 +4,7 @@ import { Users } from '../models/users.models';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,24 +58,32 @@ export class UsersService {
     });
   }
 
-  addFriends(id: string): Observable<any> {
+  addFriends(id: string, friend: string): Observable<any> {
     this.token = this.storageService.getToken();
     return this.http.post<any>(`http://localhost:5000/api/user/addFriend/${id}`, {
+      body: {
+        friend: friend
+      }
+    },{
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
         'authorization': `Bearer ${this.token}`
       }),
     });
+    
   }
 
-  removeFriends(id: string): Observable<any> {
+  removeFriends(id: string, friend: string): Observable<any> {
     this.token = this.storageService.getToken();
-    return this.http.post<any>(`http://localhost:5000/api/user/removeFriend/${id}`, {
+    return this.http.delete(`http://localhost:5000/api/user/removeFriend/${id}`,{
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
         'authorization': `Bearer ${this.token}`
       }),
-    });
+      body: {
+        friend: friend
+      }
+}); 
   }
 
 }
